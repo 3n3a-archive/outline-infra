@@ -55,6 +55,5 @@ services:
       retries: 3
 
 volumes:
-  https-portal-data:
   storage-data:
   database-data:
