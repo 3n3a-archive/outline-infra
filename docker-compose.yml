@@ -3,7 +3,6 @@ services:
 
   outline:
     image: outlinewiki/outline
-    env_file: ./docker.env
     ports:
       - "3000:3000"
     depends_on:
@@ -13,7 +12,6 @@ services:
 
   redis:
     image: redis
-    env_file: ./docker.env
     volumes:
       - ./redis.conf:/redis.conf
     command: ["redis-server", "/redis.conf"]
@@ -25,7 +23,6 @@ services:
 
   postgres:
     image: postgres
-    env_file: ./docker.env
     volumes:
       - database-data:/var/lib/postgresql/data
     healthcheck:
@@ -40,7 +37,6 @@ services:
 
   storage:
     image: minio/minio
-    env_file: ./docker.env
     entrypoint: sh
     command: -c 'minio server'
     deploy:
