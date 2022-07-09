@@ -1,0 +1,25 @@
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: master
+          
+      - name: download backup
+        run: |
+          git clone https://github.com/3n3a/outline-backup
+          cd outline-backup
+          npm i
+          node backup.js
+          unzip backup.zip
+          mv backup/* ../
+          cd ..
+        env:
+          OUTLINE_URL: ${{ secrets.OUTLINE_URL }}
+          OUTLINE_API_KEY: ${{ secrets.OUTLINE_API_KEY }}
+          
+      - name: verify backup made changey
+        run: |
+          ls -lha 
+          git status
