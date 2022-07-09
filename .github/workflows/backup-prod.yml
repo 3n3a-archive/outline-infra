@@ -1,3 +1,5 @@
+name: backup-outline
+on: [push] 
 jobs:
   build:
     runs-on: ubuntu-latest
