@@ -18,9 +18,10 @@ jobs:
           cd outline-backup
           npm i
           node backup.js
+          mv backup.js ../
+          cd ../
           unzip backup.zip
-          mv backup/* ../
-          cd ..
+          rm backup.zip
         env:
           OUTLINE_URL: ${{ secrets.OUTLINE_URL }}
           OUTLINE_API_KEY: ${{ secrets.OUTLINE_API_KEY }}
