@@ -44,5 +44,5 @@ jobs:
         run: |
           cd my-wiki
           git add .
-          git commit -m "add new backup from outline
+          git commit -m "add new backup from outline"
           git push
