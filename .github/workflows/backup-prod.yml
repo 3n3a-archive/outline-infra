@@ -13,6 +13,7 @@ jobs:
         with:
           repository: ${{ secrets.WIKI_REPO }}
           token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT
+          ref: master
           path: my-wiki
 
       - uses: actions/setup-node@v3
@@ -25,8 +26,8 @@ jobs:
           cd outline-backup
           npm i
           node backup.js
-          mv backup.zip ../my-wiki
-          cd ../my-wiki
+          mv backup.zip ../my-wiki/docs
+          cd ../my-wiki/docs
           unzip backup.zip
           rm backup.zip
         env:
@@ -38,3 +39,10 @@ jobs:
         run: |
           ls -lha 
           git status
+
+      - name: Commit changes
+        run: |
+          cd my-wiki
+          git add .
+          git commit -m "add new backup from outline
+          git push
