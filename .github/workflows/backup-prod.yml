@@ -24,6 +24,7 @@ jobs:
         env:
           OUTLINE_URL: ${{ secrets.OUTLINE_URL }}
           OUTLINE_API_KEY: ${{ secrets.OUTLINE_API_KEY }}
+          BACKUP_UA: ${{ secrets.BACKUP_UA }}
           
       - name: verify backup made changey
         run: |
