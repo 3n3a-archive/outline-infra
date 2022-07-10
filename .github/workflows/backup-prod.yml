@@ -18,7 +18,7 @@ jobs:
           cd outline-backup
           npm i
           node backup.js
-          mv backup.js ../
+          mv backup.zip ../
           cd ../
           unzip backup.zip
           rm backup.zip
