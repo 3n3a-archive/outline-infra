@@ -34,7 +34,7 @@ jobs:
           node backup.js
           mv backup.zip ../my-wiki/docs
           cd ../my-wiki/docs
-          unzip backup.zip
+          unzip -o backup.zip
           rm backup.zip
         env:
           OUTLINE_URL: ${{ secrets.OUTLINE_URL }}
