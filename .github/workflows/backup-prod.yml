@@ -40,6 +40,11 @@ jobs:
           ls -lha 
           git status
 
+      - name: Setup Git Info
+        run: |
+          git config --global user.email "bot@github.com"
+          git config --global user.name "Github Actions Backup Bot"
+
       - name: Commit changes
         run: |
           cd my-wiki
