@@ -41,7 +41,7 @@ services:
       POSTGRES_DB: outline
 
   storage:
-    image: minio/minio@sha256:7f4aefb1a8d6187069e37337c61987a2cbc917bf49489cda3b161c05542c7224
+    image: minio/minio
     env_file: docker.env
     entrypoint: sh
     command: -c 'minio server /data --console-address ":9001"'
