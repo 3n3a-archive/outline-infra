@@ -2,7 +2,10 @@ version: "3"
 services:
 
   outline:
-    image: outlinewiki/outline
+# USED FOR MIGRATION:
+#    command: 'yarn db:migrate --env production-ssl-disabled'
+    image: outlinewiki/outline:0.66.0
+    env_file: docker.env
     ports:
       - "3000:3000"
     depends_on:
@@ -11,7 +14,8 @@ services:
       - storage
 
   redis:
-    image: redis
+    image: redis:7.0.4
+    env_file: docker.env
     volumes:
       - ./redis.conf:/redis.conf
     command: ["redis-server", "/redis.conf"]
@@ -22,7 +26,8 @@ services:
       retries: 3
 
   postgres:
-    image: postgres
+    image: postgres:14.5
+    env_file: docker.env
     volumes:
       - database-data:/var/lib/postgresql/data
     healthcheck:
@@ -36,9 +41,13 @@ services:
       POSTGRES_DB: outline
 
   storage:
-    image: minio/minio
+    image: minio/minio@sha256:7f4aefb1a8d6187069e37337c61987a2cbc917bf49489cda3b161c05542c7224
+    env_file: docker.env
     entrypoint: sh
-    command: -c 'minio server'
+    command: -c 'minio server /data --console-address ":9001"'
+    ports:
+      - "9003:9000"
+      - "9013:9001"
     deploy:
       restart_policy:
         condition: on-failure
